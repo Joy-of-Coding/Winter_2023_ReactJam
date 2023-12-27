@@ -1,5 +1,8 @@
-import React from 'react'
+
 import './GameArea.css'
+import './Maze.jsx'
+import Maze from "./Maze.jsx";
+
 function GameArea() {
     const score= 0
     const highScore = 300
@@ -15,9 +18,9 @@ function GameArea() {
                     <p>{highScore}</p>
                 </div>
             </div>
-            <div className='board'>Game Play Area</div>
+            <Maze />
         </div>
-    )
+    );
 }
 
 export default GameArea
