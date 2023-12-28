@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home.jsx';
 import GameArea from './components/GameArea.jsx';
+import './App.css';
 
 function App() {
 	return (
