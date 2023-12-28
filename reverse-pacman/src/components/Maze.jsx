@@ -1,13 +1,13 @@
 import {useRef, useEffect, useState} from "react";
 
 function Maze() {
-    const speed = 1
+    const speed = -0.3
     const tileSize = 20;
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
     const requestRef = useRef();
-    // const ghost1Location = useRef({x: 239, y: 279})
-    const ghost1Location = useRef({x: 20, y: 20})
+    const ghost1Location = useRef({x: 239, y: 279})
+    // const ghost1Location = useRef({x: 20, y: 20})
 
     const ghost1Direction = useRef({dx: speed, dy:0})
     // let [iter, setIter] = useState(0)
@@ -84,7 +84,7 @@ function Maze() {
         const ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Correctly accessing ghost position and direction
+        // Current ghost position and direction
 
         let g1x = ghost1Location.current.x;
         let g1y = ghost1Location.current.y;
@@ -123,7 +123,7 @@ function Maze() {
                     case 0:
                         console.log("Go up")
                         ghost1Direction.current.dx = 0 // go up
-                        ghost1Direction.current.dy = speed
+                        ghost1Direction.current.dy = -speed
                         break;
                     case 1:
                         console.log("Go right")
@@ -133,7 +133,7 @@ function Maze() {
                     case 2:
                         console.log("Go down")
                         ghost1Direction.current.dx = 0 // go down
-                        ghost1Direction.current.dy = -speed
+                        ghost1Direction.current.dy = speed
                         break;
                     case 3:
                         console.log("Go left")
@@ -142,7 +142,7 @@ function Maze() {
                         break;
                 }
             }
-        // }
+
 
         // Drawing the maze
         for (let row = 0; row < map.current.length; row++) {
