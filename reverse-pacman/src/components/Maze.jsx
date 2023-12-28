@@ -1,12 +1,16 @@
 import {useRef, useEffect, useState} from "react";
 
 function Maze() {
+    const speed = 1
     const tileSize = 20;
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
     const requestRef = useRef();
-    const ghost1Location = useRef({x: 13, y: 15})
-    const ghost1Direction = useRef({dx: 1, dy:0})
+    // const ghost1Location = useRef({x: 239, y: 279})
+    const ghost1Location = useRef({x: 20, y: 20})
+
+    const ghost1Direction = useRef({dx: speed, dy:0})
+    // let [iter, setIter] = useState(0)
 
     const map = useRef([
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -44,11 +48,12 @@ function Maze() {
 
 
 
+
+
     function drawWall(ctx, column, row) {
         ctx.fillStyle = "#3457D5"
         ctx.fillRect(column * tileSize, row * tileSize, tileSize, tileSize);
     }
-
     function drawDot (ctx, column, row) {
         ctx.fillStyle = "yellow";  // yellow color for pellets
         ctx.beginPath();
@@ -60,10 +65,18 @@ function Maze() {
     }
     function drawGhost (ctx, column, row, color) {
         ctx.fillStyle = color;  // yellow color for pellets
-        ctx.fillRect(column * tileSize, row * tileSize, tileSize, tileSize);
+        ctx.fillRect(column , row , tileSize, tileSize);
     }
 
-
+    function isValidCell(tileX, tileY) {
+        return (
+            tileX >= 0 &&
+            tileX < map.current[0].length &&
+            tileY >= 0 &&
+            tileY < map.current.length &&
+            map.current[tileY][tileX] !== 1
+        );
+    }
 
     function update() {
 
@@ -72,41 +85,64 @@ function Maze() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Correctly accessing ghost position and direction
+
         let g1x = ghost1Location.current.x;
         let g1y = ghost1Location.current.y;
         let dx = ghost1Direction.current.dx;
         let dy = ghost1Direction.current.dy;
-        console.log(g1x, g1y, dx, dy)
+
 
         // Calculate new potential position of the ghost
         let newG1x = g1x + dx;
         let newG1y = g1y + dy;
 
         // Convert pixel position to tile position for collision checking
-        let tileX = Math.floor(ghost1Location.current.x / tileSize);
-        let tileY = Math.floor(ghost1Location.current.y / tileSize);
+        let tileXLeft = Math.floor((newG1x) / tileSize);
+        let tileYTop = Math.floor((newG1y) / tileSize);
+        let tileXRight = Math.floor((newG1y + tileSize - 1 ) / tileSize);
+        let tileYBottom = Math.floor((newG1y + tileSize - 1) / tileSize);
 
-        console.log("Ghost Pixel Position:", ghost1Location.current.x, ghost1Location.current.y);
-        console.log("Proposed New Pixel Position:", newG1x, newG1y);
-        console.log("Calculated Tile Position:", tileX, tileY);
+            if (
+                isValidCell(tileXLeft, tileYTop) &&
+                isValidCell(tileXRight, tileYTop) &&
+                isValidCell(tileXLeft, tileYBottom) &&
+                isValidCell(tileXRight, tileYBottom)
+                ) // tile is a corridor
+            {
+                // Update the position if it// 's not colliding
+                console.log("update non colliding position")
+                ghost1Location.current.x = newG1x;
+                ghost1Location.current.y = newG1y;
+            }
+             else
+            {
+                //choose random direction up, down, right or left
+                const direction = Math.floor(Math.random() * 4)
 
-
-
-        if (
-            newG1x >= 0 && newG1x < canvas.width && // Ensure the new position is within the canvas width
-            newG1y >= 0 && newG1y < canvas.height && // Ensure the new position is within the canvas height
-            tileX >= 0 && tileX < map.current[0].length && // Ensure the tile position is within the map width
-            tileY >= 0 && tileY < map.current.length && // Ensure the tile position is within the map height
-            map.current[tileY][tileX] !== 1 // Check if the tile is not a wall
-        )  {
-            // Update the position if it's not colliding
-            ghost1Location.current.x = newG1x;
-            ghost1Location.current.y = newG1y;
-        } else {
-            // Change direction if hitting a wall or boundary
-            ghost1Direction.current.dx *= -1;
-            ghost1Direction.current.dy *= -1;
-        }
+                switch (direction) {
+                    case 0:
+                        console.log("Go up")
+                        ghost1Direction.current.dx = 0 // go up
+                        ghost1Direction.current.dy = speed
+                        break;
+                    case 1:
+                        console.log("Go right")
+                        ghost1Direction.current.dx = speed  // go right
+                        ghost1Direction.current.dy = 0
+                        break;
+                    case 2:
+                        console.log("Go down")
+                        ghost1Direction.current.dx = 0 // go down
+                        ghost1Direction.current.dy = -speed
+                        break;
+                    case 3:
+                        console.log("Go left")
+                        ghost1Direction.current.dx = -speed  // go left
+                        ghost1Direction.current.dy = 0
+                        break;
+                }
+            }
+        // }
 
         // Drawing the maze
         for (let row = 0; row < map.current.length; row++) {
@@ -119,12 +155,10 @@ function Maze() {
                     case 0: // Pellet
                         drawDot(ctx, column, row);
                         break;
-                    // case 2: //Ghost 1
-                    //     drawGhost(ctx, column, row, "pink")
+
                 }
             }
         }
-
 
         drawGhost(ctx, ghost1Location.current.x, ghost1Location.current.y, "pink")
 
@@ -148,8 +182,9 @@ function Maze() {
         update (ctx)
 
         requestRef.current = requestAnimationFrame(update);
+
         return () => cancelAnimationFrame(requestRef.current);
-    }, [ghost1Location, map]);
+    }, []);
 
 
     return (
