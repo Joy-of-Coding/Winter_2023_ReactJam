@@ -6,21 +6,21 @@ function GameArea() {
     const highScore = 300
 
     return (
-        <PlayerOne />
-        // < className='gameArea'>
-        //     <div className='score'>
-        //         <div>
-        //             <p>TOP</p>
-        //             <p>{score}</p>
-        //         </div>
-        //         <div>
-        //             <p>TOP</p>
-        //             <p>{highScore}</p>
-        //         </div>
-        //     </div>
-        //     <div className='board'>Game Play Area</div>
-        //
-        // </div>
+
+        <div className='gameArea'>
+            <div className='score'>
+                <div>
+                    <p>TOP</p>
+                    <p>{score}</p>
+                </div>
+                <div>
+                    <p>TOP</p>
+                    <p>{highScore}</p>
+                </div>
+            </div>
+            <div className='board'>Game Play Area</div>
+
+        </div>
     )
 }
 
