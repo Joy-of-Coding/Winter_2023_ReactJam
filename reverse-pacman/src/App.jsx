@@ -1,14 +1,15 @@
-import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import Home from './components/Home.jsx';
 import GameArea from './components/GameArea.jsx';
 import './App.css';
 
 function App() {
+	const [startGame, setStartGame] = useState(false);
 	return (
-		<Routes>
-			<Route path='/' element={<Home />} />
-			<Route path='/start-game' element={<GameArea />} />
-		</Routes>
+		<>
+			{!startGame && <Home setStartGame={setStartGame} />}
+			{startGame && <GameArea />}
+		</>
 	);
 }
 
