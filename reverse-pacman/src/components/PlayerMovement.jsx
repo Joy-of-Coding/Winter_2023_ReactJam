@@ -7,28 +7,29 @@ function PlayerOne() {
     const [position, setPosition] = useState({ top: 200, left: 80 });
 
     useEffect(() => {
-        const up = (e) => {
+        const changeDirection = (event) => {
             console.log("Up running");
-            switch (e.key) {
+            switch (event.key) {
                 case 'w': // up
                     setPosition(currentPosition => ({ ...currentPosition, top: currentPosition.top - moveBy }));
                     break;
-                case 'a': // left
-                    setPosition(currentPosition => ({ ...currentPosition, left: currentPosition.left - moveBy }));
+                case 'a':
+                    // left
                     break;
-                case 's': // down
-                    setPosition(currentPosition => ({ ...currentPosition, top: currentPosition.top + moveBy }));
+                case 's': 
+                    // down
                     break;
-                case 'd': // right
-                    setPosition(currentPosition => ({ ...currentPosition, left: currentPosition.left + moveBy }));
+                case 'd':
+                    // right
                     break;
-                // Add additional cases for other keys if necessary
+                // Add additional cases for 2nd player??
             }
         };
 
-        window.addEventListener('keypress', up);
+        window.addEventListener('keypress', changeDirection);
+
         return () => {
-            window.removeEventListener('keypress', up);
+            window.removeEventListener('keypress', changeDirection);
         };
     }, []); // still empty because we're using functional updates now
 
