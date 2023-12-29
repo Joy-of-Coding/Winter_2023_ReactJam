@@ -87,7 +87,7 @@ function GameArea() {
     // const score= 0
     // const highScore = 300
 
-    const pngFile = bkgnd_image;
+    // const pngFile = bkgnd_image;
     return (
         <div>
             <h1>React PNG Parser</h1>
