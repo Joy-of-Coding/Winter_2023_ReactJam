@@ -26,10 +26,10 @@ function PlayerOne() {
             }
         };
 
-        window.addEventListener('keypress', changeDirection);
+        document.addEventListener('keypress', changeDirection);
 
         return () => {
-            window.removeEventListener('keypress', changeDirection);
+            document.removeEventListener('keypress', changeDirection);
         };
     }, []); // still empty because we're using functional updates now
 
