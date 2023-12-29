@@ -1,6 +1,11 @@
 
 .playerMovement {
-    color: white
+    color: white;
+    text-align: center;
+}
+
+li {
+    list-style: none;
 }
 
 .character {

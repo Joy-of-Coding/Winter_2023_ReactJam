@@ -3,7 +3,7 @@ import './PlayerMovement.css'
 
 let moveBy = 20;
 
-function PlayerMovement() {
+function PlayerOne() {
     const [position, setPosition] = useState({ top: 200, left: 80 });
 
     useEffect(() => {
@@ -49,4 +49,4 @@ function PlayerMovement() {
     );
 }
 
-export default PlayerMovement;
+export default PlayerOne;
