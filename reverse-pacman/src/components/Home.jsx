@@ -1,5 +1,4 @@
 import './Home.css';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -11,7 +10,7 @@ const Home = () => {
 
             <div className='home-buttons-container'>
                 <button className='home-start-button'>
-                    <Link to='/start-game'>Start Game</Link>
+                   Start Game
                 </button>
                 <button className='home-howTo-button'>How To Play</button>
             </div>
