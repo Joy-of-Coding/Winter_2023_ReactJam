@@ -26,11 +26,11 @@ function PlayerOne() {
             }
         };
 
-        window.addEventListener('keypress', up);
+        document.addEventListener('keypress', up);
         return () => {
-            window.removeEventListener('keypress', up);
+            document.removeEventListener('keypress', up);
         };
-    }, []); // still empty because we're using functional updates now
+    }, []); //  empty because we're using functional updates
 
     return (
         <div className='playerMovement'>
