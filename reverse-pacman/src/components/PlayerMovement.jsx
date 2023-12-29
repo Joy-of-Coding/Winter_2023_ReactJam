@@ -16,7 +16,7 @@ function PlayerOne() {
                 case 'a':
                     // left
                     break;
-                case 's': 
+                case 's':
                     // down
                     break;
                 case 'd':
