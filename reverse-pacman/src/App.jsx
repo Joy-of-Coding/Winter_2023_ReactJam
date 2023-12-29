@@ -5,11 +5,16 @@ import Home from "./components/Home.jsx";
 
 function App() {
   // const [count, setCount] = useState(0)
+  const [startGame, setStartGame] = useState(false)
 
   return (
       <>
-        <Home />
-        <GameArea />
+        {!startGame &&
+          <Home setStartGame={setStartGame}/>
+      }
+        {startGame &&
+            <GameArea setStartGame={setStartGame}/>
+        }
       </>
   )
 }

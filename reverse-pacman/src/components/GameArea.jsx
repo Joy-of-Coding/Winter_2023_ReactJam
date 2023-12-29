@@ -1,6 +1,6 @@
 import React from 'react'
 import './GameArea.css'
-function GameArea() {
+function GameArea({setStartGame}) {
     const score= 0
     const highScore = 300
     return (
@@ -16,6 +16,12 @@ function GameArea() {
                 </div>
             </div>
             <div className='board'>Game Play Area</div>
+            <button
+
+                onClick={()=>setStartGame(false)}
+            >
+                Start Game
+            </button>
         </div>
     )
 }

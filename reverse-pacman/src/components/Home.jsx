@@ -1,6 +1,6 @@
 import './Home.css';
 
-const Home = () => {
+const Home = ({setStartGame}) => {
     return (
         <div className='home-container'>
             <div className='home-title-container'>
@@ -9,7 +9,10 @@ const Home = () => {
             </div>
 
             <div className='home-buttons-container'>
-                <button className='home-start-button'>
+                <button
+                    className='home-start-button'
+                    onClick={()=>setStartGame(true)}
+                >
                    Start Game
                 </button>
                 <button className='home-howTo-button'>How To Play</button>
