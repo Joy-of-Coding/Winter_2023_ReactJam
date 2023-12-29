@@ -38,9 +38,155 @@
 	background-color: darkred;
 }
 
+.path {
+	position: relative;
+	width: 100%;
+	height: 100px;
+	background-color: #333;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.path::after {
+	content: '';
+	position: absolute;
+	display: block;
+	border-top: 12px dotted #fff;
+	width: 90%;
+	top: 50%;
+	left: 5%;
+	margin-top: -6px;
+}
+
+.pacman {
+	position: absolute;
+	z-index: 99;
+	top: 50%;
+	left: -20%;
+	animation: moveForward 5s linear infinite;
+	animation-delay: 1s;
+}
+
+.pacman::before,
+.pacman::after {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border: solid 30px yellow;
+	margin-top: -30px;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	animation: mouthTop 0.7s ease infinite;
+}
+
+.pacman::after {
+	border-color: yellow;
+	border-right-color: transparent;
+	border-top-color: transparent;
+	animation: mouthBottom 0.7s ease infinite;
+}
+
+.ghost {
+	position: absolute;
+	z-index: 99;
+	top: 50%;
+	left: 20%;
+	width: 60px;
+	height: 70px;
+	margin-top: -35px;
+	background-color: red;
+	border-top-left-radius: 70px;
+	border-top-right-radius: 70px;
+	animation: moveForward 5s linear infinite, blinking 0.4s linear infinite;
+}
+
+.ghost::before,
+.ghost::after {
+	content: '';
+	position: absolute;
+	background-color: white;
+	width: 20px;
+	height: 25px;
+	border-radius: 100%;
+	top: 15px;
+	left: 4px;
+}
+
+.ghost::after {
+	left: 28px;
+}
+
+.eyes::before,
+.eyes:after {
+	content: '';
+	position: absolute;
+	background-color: blue;
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	top: 25px;
+	left: 5px;
+	z-index: 99;
+}
+
+.eyes::after {
+	left: 30px;
+}
+
+.skirt,
+.skirt::before,
+.skirt::after {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid 10px#333;
+	border-top-color: transparent;
+	bottom: -10px;
+}
+
+.skirt::before {
+	content: '';
+	left: 10px;
+}
+.skirt::after {
+	content: '';
+	left: 30px;
+}
+
 @media (max-width: 600px) {
 	.home-buttons-container {
 		flex-direction: column;
 		align-items: center;
+	}
+}
+
+@keyframes moveForward {
+	0% {
+		left: -20%;
+	}
+	100% {
+		left: 100%;
+	}
+}
+
+@keyframes mouthTop {
+	50% {
+		transform: rotate(44deg);
+	}
+}
+
+@keyframes mouthBottom {
+	50% {
+		transform: rotate(-44deg);
+	}
+}
+
+@keyframes blinking {
+	50% {
+		background-color: hotpink;
 	}
 }
