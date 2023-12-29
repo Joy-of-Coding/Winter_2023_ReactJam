@@ -1,6 +1,5 @@
-import React from 'react'
 import './GameArea.css'
-import PlayerOne from "./PlayerMovement.jsx";
+
 function GameArea() {
     const score= 0
     const highScore = 300
