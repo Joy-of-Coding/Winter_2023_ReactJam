@@ -8,6 +8,14 @@ const Home = ({ setStartGame }) => {
 				<p>(Reversed)</p>
 			</div>
 
+			<div className='path'>
+				<div className='ghost'>
+					<div className='eyes'></div>
+					<div className='skirt'></div>
+				</div>
+				<div className='pacman'></div>
+			</div>
+
 			<div className='home-buttons-container'>
 				<button
 					className='home-start-button'
