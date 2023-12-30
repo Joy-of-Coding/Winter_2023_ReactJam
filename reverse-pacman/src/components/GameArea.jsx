@@ -1,8 +1,10 @@
-import React from 'react'
 import './GameArea.css'
+import PlayerMovement from "./PlayerMovement.jsx";
+
 function GameArea() {
     const score= 0
     const highScore = 300
+
     return (
         <div className='gameArea'>
             <div className='score'>
@@ -15,7 +17,12 @@ function GameArea() {
                     <p>{highScore}</p>
                 </div>
             </div>
-            <div className='board'>Game Play Area</div>
+            <div className='board'>
+                <h1>Game Play Area</h1>
+                <PlayerMovement />
+
+            </div>
+
         </div>
     )
 }
