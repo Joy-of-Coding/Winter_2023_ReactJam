@@ -7,7 +7,6 @@ const Home = ({ setStartGame }) => {
 				<h1>Pac-Man</h1>
 				<p>(Reversed)</p>
 			</div>
-
 			<div className='home-buttons-container'>
 				<button
 					className='home-start-button'
