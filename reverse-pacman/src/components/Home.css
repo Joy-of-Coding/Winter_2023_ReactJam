@@ -50,7 +50,7 @@
 	overflow: hidden;
 }
 
-/* .path::after {
+.path::after {
 	content: '';
 	position: absolute;
 	display: block;
@@ -59,7 +59,7 @@
 	top: 50%;
 	left: 5%;
 	margin-top: -6px;
-} */
+}
 
 .pacman {
 	position: absolute;
