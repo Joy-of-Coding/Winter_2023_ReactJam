@@ -1,14 +1,21 @@
 import React from 'react'
 import './GameArea.css'
-function GameArea() {
-    const score= 0
+
+function GameArea({ setStartGame }) {
+    const score = 0
     const highScore = 300
     return (
         <div className='gameArea'>
             <div className='score'>
                 <div>
-                    <p>TOP</p>
+                    <p>To</p>
                     <p>{score}</p>
+                </div>
+                <div>
+                    <button
+                    onClick={() => setStartGame(false)}> 
+                        Home
+                    </button>
                 </div>
                 <div>
                     <p>TOP</p>
@@ -21,3 +28,6 @@ function GameArea() {
 }
 
 export default GameArea
+
+
+

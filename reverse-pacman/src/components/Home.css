@@ -152,6 +152,7 @@
 	content: '';
 	left: 10px;
 }
+
 .skirt::after {
 	content: '';
 	left: 30px;
@@ -168,6 +169,7 @@
 	0% {
 		left: -20%;
 	}
+
 	100% {
 		left: 100%;
 	}

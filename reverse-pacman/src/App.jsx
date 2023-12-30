@@ -6,12 +6,12 @@ import YellowDude from './components/YellowDude.jsx';
 
 function App() {
 	const [startGame, setStartGame] = useState(false);
+console.log(startGame)
 	return (
 		<>
-			<YellowDude />
 			{!startGame && <Home setStartGame={setStartGame} />}
-			{startGame && <GameArea />}
-			
+			{startGame && <GameArea setStartGame={setStartGame} />}
+
 		</>
 	);
 }

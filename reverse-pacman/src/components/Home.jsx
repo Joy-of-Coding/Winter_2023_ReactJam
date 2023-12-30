@@ -15,11 +15,10 @@ const Home = ({ setStartGame }) => {
 				</div>
 				<div className='pacman'></div>
 			</div>
-
 			<div className='home-buttons-container'>
 				<button
 					className='home-start-button'
-					onClick={() => setStartGame(true)}
+					onClick={() => setStartGame(true)} 
 				>
 					Start Game
 				</button>
@@ -30,3 +29,5 @@ const Home = ({ setStartGame }) => {
 };
 
 export default Home;
+
+
