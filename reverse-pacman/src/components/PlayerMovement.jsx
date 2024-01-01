@@ -24,31 +24,46 @@ function PlayerMovement() {
 		console.log('Key pressed');
 		switch (event.key) {
 			case 'w': //up
-				setTop((prevState) => prevState - moveBy);
+				setTop((prevState) =>
+					prevState - moveBy < 0 ? 490 : prevState - moveBy
+				);
 				break;
 			case 'a': //left
-				setLeft((prevState) => prevState - moveBy);
+				setLeft((prevState) =>
+					prevState - moveBy < 0 ? 390 : prevState - moveBy
+				);
 				break;
 			case 's': //down
-				setTop((prevState) => prevState + moveBy);
+				setTop((prevState) =>
+					prevState + moveBy > 490 ? 0 : prevState + moveBy
+				);
 				break;
 			case 'd': //right
-				setLeft((prevState) => prevState + moveBy);
+				setLeft((prevState) =>
+					prevState + moveBy > 390 ? 0 : prevState + moveBy
+				);
 				break;
 			case 'ArrowUp': //up
-				setTop2((prevState) => prevState - moveBy);
+				setTop2((prevState) =>
+					prevState - moveBy < 0 ? 490 : prevState - moveBy
+				);
 				break;
 			case 'ArrowLeft': //left
-				setLeft2((prevState) => prevState - moveBy);
+				setLeft2((prevState) =>
+					prevState - moveBy < 0 ? 390 : prevState - moveBy
+				);
 				break;
 			case 'ArrowDown': //down
-				setTop2((prevState) => prevState + moveBy);
+				setTop2((prevState) =>
+					prevState + moveBy > 490 ? 0 : prevState + moveBy
+				);
 				break;
 			case 'ArrowRight': //right
-				setLeft2((prevState) => prevState + moveBy);
+				setLeft2((prevState) =>
+					prevState + moveBy > 390 ? 0 : prevState + moveBy
+				);
 				break;
 			default:
-				console.log('hello world');
 				break;
 		}
 	};
