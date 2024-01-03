@@ -1,8 +1,8 @@
 import './GameArea.css';
 import PlayerMovement from './PlayerMovement.jsx';
-import { usState, useEffect } from 'react';
+//import { useState, useEffect } from 'react';
 
-function GameArea() {
+function GameArea({setStartGame}) {
 	const score = 0;
 	const highScore = 300;
 
@@ -66,6 +66,12 @@ function GameArea() {
 					<p>TOP</p>
 					<p>{score}</p>
 				</div>
+                <div>
+                    <button
+                    onClick={() => setStartGame(false)}> 
+                        Home
+                    </button>
+                </div>
 				<div>
 					<p>TOP</p>
 					<p>{highScore}</p>
@@ -79,6 +85,9 @@ function GameArea() {
 					gridTemplateRows: `repeat(${boardDimensions.height}, 1fr)`,
 				}}
 			>
+
+                <PlayerMovement />
+                  
 				{maze.map((row, i) =>
 					row.map((col, j) => (
 						<div
@@ -93,7 +102,7 @@ function GameArea() {
 						></div>   //{`${i} - ${j}`}
 					))
 				)}
-				<PlayerMovement />
+				
 			</div>
 		</div>
 	);

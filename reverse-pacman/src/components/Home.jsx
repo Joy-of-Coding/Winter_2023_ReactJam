@@ -1,7 +1,7 @@
 import './Home.css';
 import { useState, useEffect } from 'react';
 
-const Home = ({ setStartGame }) => {
+const Home = ({setStartGame}) => {
 	const [showGameControls, setShowGameControls] = useState(false);
 
 	useEffect(() => {
