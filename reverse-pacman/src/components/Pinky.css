@@ -1,0 +1,121 @@
+/* Pinky ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.path2 {
+	position: relative;
+	width: 100%;
+	height: 100px;
+	background-color: #333;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.path2::after {
+	content: '';
+	position: absolute;
+	display: block;
+	border-top: 12px dotted #fff;
+	width: 90%;
+	top: 50%;
+	left: 5%;
+	margin-top: -6px;
+}
+
+.pacman2 {
+	position: absolute;
+	z-index: 99;
+	top: 50%;
+	left: -20%;
+	animation: moveForward 6s linear infinite;
+	animation-delay: 1.1s;
+}
+
+.pacman2::before,
+.pacman2::after {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border: solid 30px yellow;
+	margin-top: -30px;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	animation: mouthTop 0.7s ease infinite;
+}
+
+.pacman2::after {
+	border-color: yellow;
+	border-right-color: transparent;
+	border-top-color: transparent;
+	animation: mouthBottom 0.7s ease infinite;
+}
+
+.ghost2 {
+	position: absolute;
+	z-index: 99;
+	top: 50%;
+	left: 20%;
+	width: 60px;
+	height: 70px;
+	margin-top: -35px;
+	background-color: pink;
+	border-top-left-radius: 70px;
+	border-top-right-radius: 70px;
+	animation: moveForward 6s linear infinite, 0.4s linear infinite;
+}
+
+.ghost2::before,
+.ghost2::after {
+	content: '';
+	position: absolute;
+	background-color: white;
+	width: 20px;
+	height: 25px;
+	border-radius: 100%;
+	top: 15px;
+	left: 4px;
+}
+
+.ghost2::after {
+	left: 28px;
+}
+
+.eyes2::before,
+.eyes2:after {
+	content: '';
+	position: absolute;
+	background-color: blue;
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	top: 25px;
+	left: 5px;
+	z-index: 99;
+}
+
+.eyes2::after {
+	left: 30px;
+}
+
+.skirt2,
+.skirt2::before,
+.skirt2::after {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid 10px#333;
+	border-top-color: transparent;
+	bottom: -10px;
+}
+
+.skirt2::before {
+	content: '';
+	left: 10px;
+}
+
+.skirt2::after {
+	content: '';
+	left: 30px;
+}
