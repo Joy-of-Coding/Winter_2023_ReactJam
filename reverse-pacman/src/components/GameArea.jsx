@@ -32,6 +32,8 @@ function GameArea({ setStartGame }) {
 					display: 'grid',
 					gridTemplateColumns: `repeat(${boardDimensions.width}, 1fr)`,
 					gridTemplateRows: `repeat(${boardDimensions.height}, 1fr)`,
+					backgroundColor: 'pink',
+					overflow: 'hidden',
 				}}
 			>
 				<PlayerMovement />
@@ -46,7 +48,7 @@ function GameArea({ setStartGame }) {
 								placeContent: 'center center',
 								alignContent: 'center',
 								alignItems: 'center',
-								backgroundColor: col === 1 ? 'green' : '',
+								backgroundColor: col === 1 ? 'green' : 'transparent',
 							}}
 						></div>
 					))
