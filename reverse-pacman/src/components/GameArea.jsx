@@ -43,12 +43,14 @@ function GameArea({ setStartGame }) {
 						<div
 							key={`${i} - ${j}`}
 							style={{
-								border: '1px solid white',
+//								border: '1px solid white',
+								border: '1px',
 								display: 'flex',
 								placeContent: 'center center',
 								alignContent: 'center',
 								alignItems: 'center',
-								backgroundColor: col === 1 ? 'green' : 'transparent',
+//								backgroundColor: col === 1 ? 'green' : 'transparent',								
+								backgroundColor: col === 1 ? 'green' : 'white',
 
 							}}
 						></div>
