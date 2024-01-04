@@ -49,7 +49,6 @@ function GameArea({ setStartGame }) {
 								alignContent: 'center',
 								alignItems: 'center',
 								backgroundColor: col === 1 ? 'green' : 'transparent',
-
 							}}
 						></div>
 					))
