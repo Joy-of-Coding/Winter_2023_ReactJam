@@ -3,11 +3,13 @@ import maze from '../utils/data';
 
 // Assuming each cell in the grid is 10x10 pixels
 const board_width = 400;
-const board_height = 500;
+const board_height = 439;
 const maze_cols = maze[0].length;
 const maze_rows = maze.length;
+
 console.log(maze_cols);
 console.log(maze_rows);
+
 
 // Calculating the cell size
 const cell_width = board_width / maze_cols;
@@ -22,7 +24,7 @@ function PlayerMovement() {
 
 	const initialPlayerPositions = {
 		player1: { top: 15 * cellSize, left: 13 * cellSize }, // for maze[15][13]
-		player2: { top: 15 * cellSize, left: 14 * cellSize }, // for maze[15][14]
+		player2: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]
 	};
 
 	const [players, setPlayers] = useState(initialPlayerPositions);
@@ -92,7 +94,7 @@ function PlayerMovement() {
 			<div
 				className='element'
 				style={{
-					top: players.player1.top + -3.5 + 'px',
+					top: players.player1.top + 'px',
 					left: players.player1.left + -3.5 + 'px',
 					width: cellSize + 'px',
 					height: cellSize + 'px',
@@ -103,8 +105,9 @@ function PlayerMovement() {
 			<div
 				className='element'
 				style={{
-					top: players.player2.top + -3.5 + 'px',
-					left: players.player2.left + -3.5 + 'px',
+					top: players.player2.top + 'px',
+					left: players.player2.left + -11 + 'px',
+
 					width: cellSize + 'px',
 					height: cellSize + 'px',
 					position: 'absolute',
