@@ -1,23 +1,15 @@
 import './GameArea.css';
 import PlayerMovement from './PlayerMovement.jsx';
-import { usState, useEffect } from 'react';
+import maze from '../utils/data.js';
 
-function GameArea() {
+function GameArea({ setStartGame }) {
 	const score = 0;
 	const highScore = 300;
 
 	const boardDimensions = {
-		width: 10,
-		height: 10,
+		width: maze[0].length,
+		height: maze.length,
 	};
-
-	const board = Array(boardDimensions.width)
-		.fill()
-		.map((_, idx) =>
-			Array(boardDimensions.height)
-				.fill()
-				.map((_, index) => index)
-		);
 
 	return (
 		<div className='gameArea'>
@@ -25,6 +17,9 @@ function GameArea() {
 				<div>
 					<p>TOP</p>
 					<p>{score}</p>
+				</div>
+				<div>
+					<button onClick={() => setStartGame(false)}>Home</button>
 				</div>
 				<div>
 					<p>TOP</p>
@@ -37,9 +32,13 @@ function GameArea() {
 					display: 'grid',
 					gridTemplateColumns: `repeat(${boardDimensions.width}, 1fr)`,
 					gridTemplateRows: `repeat(${boardDimensions.height}, 1fr)`,
+					backgroundColor: 'pink',
+					overflow: 'hidden',
 				}}
 			>
-				{board.map((row, i) =>
+				<PlayerMovement />
+
+				{maze.map((row, i) =>
 					row.map((col, j) => (
 						<div
 							key={`${i} - ${j}`}
@@ -49,11 +48,11 @@ function GameArea() {
 								placeContent: 'center center',
 								alignContent: 'center',
 								alignItems: 'center',
+								backgroundColor: col === 1 ? 'green' : 'transparent',
 							}}
-						>{`${i} - ${j}`}</div>
+						></div>
 					))
 				)}
-				<PlayerMovement />
 			</div>
 		</div>
 	);

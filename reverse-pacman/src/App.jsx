@@ -8,7 +8,7 @@ function App() {
 	return (
 		<>
 			{!startGame && <Home setStartGame={setStartGame} />}
-			{startGame && <GameArea />}
+			{startGame && <GameArea setStartGame={setStartGame} />}
 		</>
 	);
 }
