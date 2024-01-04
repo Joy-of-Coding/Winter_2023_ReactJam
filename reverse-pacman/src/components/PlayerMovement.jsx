@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import maze from '../utils/data';
 
+// Assuming each cell in the grid is 10x10 pixels
 const board_width = 400;
 const board_height = 439;
 const maze_cols = maze[0].length;
 const maze_rows = maze.length;
+
+console.log(maze_cols);
+console.log(maze_rows);
+
 
 // Calculating the cell size
 const cell_width = board_width / maze_cols;
@@ -102,6 +107,7 @@ function PlayerMovement() {
 				style={{
 					top: players.player2.top + 'px',
 					left: players.player2.left + -11 + 'px',
+
 					width: cellSize + 'px',
 					height: cellSize + 'px',
 					position: 'absolute',
