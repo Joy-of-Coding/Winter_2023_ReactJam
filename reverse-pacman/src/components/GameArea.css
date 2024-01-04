@@ -7,6 +7,14 @@
 	border: 4px red solid;
 	margin: 20px auto;
 	overflow: hidden;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	width: 400px;
+	height: 500px;
+	border: 4px red solid;
+	margin: 20px auto;
+	overflow: hidden;
 }
 
 .score {
