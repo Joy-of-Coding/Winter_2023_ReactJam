@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import maze from '../utils/data';
 
 
-// Assuming each cell in the grid is 10x10 pixels
+//// Assuming each cell in the grid is 10x10 pixels
 const board_width = 400;
 const board_height = 439;
 const maze_cols = maze[0].length;
@@ -12,20 +12,20 @@ console.log(maze_cols);
 console.log(maze_rows);
 
 
-// Calculating the cell size
+//// Calculating the cell size
 const cell_width = board_width / maze_cols;
 const cell_height = board_height / maze_rows;
 
 const cellSize = Math.min(cell_width, cell_height);
 
-function PlayerMovement() {
+function YellowDude() {
 	const mazeRows = maze.length;
 	const mazeCols = maze[0].length;
 	const pixelToGrid = (pixel) => Math.floor(pixel / cellSize);
 
 	const initialPlayerPositions = {
-		player1: { top: 15 * cellSize, left: 13 * cellSize }, // for maze[15][13]
-		player2: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]
+	pacman: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]	
+// Deleted Blinky and Clyde //    	
 	};
 
 	const [players, setPlayers] = useState(initialPlayerPositions);
@@ -91,31 +91,21 @@ function PlayerMovement() {
 	}, [players]);
 
 	return (
-		<>
-			<div
+		<>			
+			<div //pacman arrives //
 				className='element'
 				style={{
-					top: players.player1.top + 'px',
-					left: players.player1.left + -3.5 + 'px',
+					top: players.pacman.top -14 +'px',
+					left: players.pacman.left + 160 + 'px',
 					width: cellSize + 'px',
 					height: cellSize + 'px',
 					position: 'absolute',
-					backgroundColor: 'red',
+					backgroundColor: 'yellow',
 				}}
 			/>
-			<div
-				className='element'
-				style={{
-					top: players.player2.top + 'px',
-					left: players.player2.left + -11 + 'px',
-					width: cellSize + 'px',
-					height: cellSize + 'px',
-					position: 'absolute',
-					backgroundColor: 'cyan',
-				}}
-			/>			
 		</>
+// Deleted Blinky and Clyde // 
 	);
-}
+}            
 
-export default PlayerMovement;
+export default YellowDude;
