@@ -4,18 +4,26 @@ import maze from '../utils/data.js';
 import YellowDude from './YellowDude.jsx';
 
 
-
 function GameArea( setStartGame ) {
+
+	//all constants pulled to top of Game Area
+	const cellSize = 15
 	const score = 0;
 	const highScore = 300;
+	const boardColumns = maze[0].length
+	const boardRows = maze.length
+	const boardWidth = boardColumns * cellSize
+	const boardHeight = boardRows * cellSize
 
-	const boardDimensions = {
-		width: maze[0].length,
-		height: maze.length,
-	};
 
 	return (
-		<div className='gameArea'>
+		//set dynamic game area based on board size & cell size
+		<div className='gameArea'
+			style={{
+				width:  boardWidth,
+				height: boardHeight
+			}}
+		>
 			<div className='score'>
 				<div>
 					<p>TOP</p>
@@ -33,21 +41,20 @@ function GameArea( setStartGame ) {
 				className='board'
 				style={{
 					display: 'grid',
-					gridTemplateColumns: `repeat(${boardDimensions.width}, 1fr)`,
-					gridTemplateRows: `repeat(${boardDimensions.height}, 1fr)`,
-					backgroundColor: 'pink',
-					overflow: 'hidden',
+					gridTemplateColumns: `repeat(${boardColumns}, 1fr)`,
+					gridTemplateRows: `repeat(${boardRows}, 1fr)`,
+					backgroundColor: 'lightgray',
+					// overflow: 'hidden',  //shouldn't need this if math is correct and board size calc from maze
 				}}
 			>
 
-				<PlayerMovement />
 
 				{maze.map((row, i) =>
 					row.map((col, j) => (
 						<div
 							key={`${i} - ${j}`}
 							style={{
-								border: '1px solid white',
+								// border: '1px solid white',
 								display: 'flex',
 								placeContent: 'center center',
 								alignContent: 'center',
@@ -63,12 +70,12 @@ function GameArea( setStartGame ) {
                                     width: '2px',
                                     backgroundColor: col === 0 ? 'red' : null,
                                     borderRadius: '50%',
-
                                 }}
                             />
 						</div>
 					))
 				)}
+				<PlayerMovement boardColumns={boardColumns} boardRows={boardRows} cellSize={cellSize}/>
 				<YellowDude />
 			</div>
 		</div>

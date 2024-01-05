@@ -2,30 +2,24 @@ import { useState, useEffect } from 'react';
 import maze from '../utils/data';
 
 
-// Assuming each cell in the grid is 10x10 pixels
-const board_width = 400;
-const board_height = 439;
-const maze_cols = maze[0].length;
-const maze_rows = maze.length;
 
-console.log(maze_cols);
-console.log(maze_rows);
-
-
-// Calculating the cell size
-const cell_width = board_width / maze_cols;
-const cell_height = board_height / maze_rows;
-
-const cellSize = Math.min(cell_width, cell_height);
-
-function PlayerMovement() {
-	const mazeRows = maze.length;
-	const mazeCols = maze[0].length;
+// all const prior to this line are used only to calc cell size
+//this is the calculated cell size from board dimensions from Game Area
+// const cellSize = 14.161290322580646
+function PlayerMovement({cellSize, boardRows, boardColumns}) {  //this is correct react syntax despite linting error
+	console.log(boardColumns, boardRows, cellSize)
+	// const player1Start = {top: 1, left: 1}
+	// const player2Start = {top: 15, left: 14}
+	// const boardRows = maze.length;
+	// const boardColumns = maze[0].length;
 	const pixelToGrid = (pixel) => Math.floor(pixel / cellSize);
 
 	const initialPlayerPositions = {
 		player1: { top: 15 * cellSize, left: 13 * cellSize }, // for maze[15][13]
 		player2: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]
+
+		// player1: { top: player1Start.top * cellSize, left: player1Start.left * cellSize }, // for maze[15][13]
+		// player2: { top: player2Start.top * cellSize, left: player2Start.left * cellSize }, // for maze[15][14]
 	};
 
 	const [players, setPlayers] = useState(initialPlayerPositions);
@@ -34,9 +28,9 @@ function PlayerMovement() {
 	const canMoveTo = (newGridRow, newGridCol) => {
 		return (
 			newGridRow >= 0 &&
-			newGridRow < mazeRows &&
+			newGridRow < boardRows &&
 			newGridCol >= 0 &&
-			newGridCol < mazeCols &&
+			newGridCol < boardColumns &&
 			maze[newGridRow][newGridCol] === 0
 		);
 	};
@@ -97,6 +91,8 @@ function PlayerMovement() {
 				style={{
 					top: players.player1.top + 'px',
 					left: players.player1.left + -3.5 + 'px',
+					// left: players.player1.left + 'px',
+
 					width: cellSize + 'px',
 					height: cellSize + 'px',
 					position: 'absolute',
