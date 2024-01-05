@@ -25,6 +25,7 @@ function PlayerMovement() {
 	const initialPlayerPositions = {
 		player1: { top: 15 * cellSize, left: 13 * cellSize }, // for maze[15][13]
 		player2: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]
+		pacman: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]
 	};
 
 	const [players, setPlayers] = useState(initialPlayerPositions);
@@ -107,11 +108,21 @@ function PlayerMovement() {
 				style={{
 					top: players.player2.top + 'px',
 					left: players.player2.left + -11 + 'px',
-
 					width: cellSize + 'px',
 					height: cellSize + 'px',
 					position: 'absolute',
 					backgroundColor: 'blue',
+				}}
+			/>
+			<div //pacman arrives //
+				className='element'
+				style={{
+					top: players.pacman.top -14 +'px',
+					left: players.pacman.left + 160 + 'px',
+					width: cellSize + 'px',
+					height: cellSize + 'px',
+					position: 'absolute',
+					backgroundColor: 'yellow',
 				}}
 			/>
 		</>
