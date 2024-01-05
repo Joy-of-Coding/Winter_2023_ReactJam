@@ -14,6 +14,7 @@ function GameArea( setStartGame ) {
 	const boardRows = maze.length
 	const boardWidth = boardColumns * cellSize
 	const boardHeight = boardRows * cellSize
+	const scoreBoardHeight = 55
 
 
 	return (
@@ -21,7 +22,7 @@ function GameArea( setStartGame ) {
 		<div className='gameArea'
 			style={{
 				width:  boardWidth,
-				height: boardHeight
+				height: boardHeight + scoreBoardHeight
 			}}
 		>
 			<div className='score'>
@@ -40,9 +41,13 @@ function GameArea( setStartGame ) {
 			<div
 				className='board'
 				style={{
-					display: 'grid',
-					gridTemplateColumns: `repeat(${boardColumns}, 1fr)`,
-					gridTemplateRows: `repeat(${boardRows}, 1fr)`,
+
+					width:  boardWidth,
+					height: boardHeight,
+
+					// display: 'grid',
+					// gridTemplateColumns: `repeat(${boardColumns}, 1fr)`,
+					// gridTemplateRows: `repeat(${boardRows}, 1fr)`,
 					backgroundColor: 'midnightblue',
 					// overflow: 'hidden',  //shouldn't need this if math is correct and board size calc from maze
 				}}
