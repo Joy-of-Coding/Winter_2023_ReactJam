@@ -43,7 +43,7 @@ function GameArea( setStartGame ) {
 					display: 'grid',
 					gridTemplateColumns: `repeat(${boardColumns}, 1fr)`,
 					gridTemplateRows: `repeat(${boardRows}, 1fr)`,
-					backgroundColor: 'lightgray',
+					backgroundColor: 'midnightblue',
 					// overflow: 'hidden',  //shouldn't need this if math is correct and board size calc from maze
 				}}
 			>
@@ -64,7 +64,6 @@ function GameArea( setStartGame ) {
 								top: i * cellSize + 'px', //row
 								// left: players.player1.left + -3.5 + 'px',
 								left:  j * cellSize + 'px', // column left edge
-
 								width: cellSize + 'px',
 								height: cellSize + 'px',
 								position: 'absolute',
@@ -75,9 +74,13 @@ function GameArea( setStartGame ) {
                                 className='PacmanFood'
                                 key={`${i} - ${j}`}
                                 style={{
-                                    height: '2px',
-                                    width: '2px',
-                                    backgroundColor: col === 0 ? 'red' : null,
+									// top: i * cellSize + (cellSize/2 -4)  + 'px', //row
+									// left:  j * cellSize + cellSize/2  + 'px', // column left edge
+									marginTop: cellSize/4,
+									marginLeft: cellSize/4,
+									width: cellSize/2 + 'px',
+									height: cellSize/2 + 'px',
+                                    backgroundColor: col === 0 ? 'lightskyblue' : null,
                                     borderRadius: '50%',
                                 }}
                             />
