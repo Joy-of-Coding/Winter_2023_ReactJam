@@ -1,8 +1,11 @@
 import './GameArea.css';
 import PlayerMovement from './PlayerMovement.jsx';
 import maze from '../utils/data.js';
+import YellowDude from './YellowDude.jsx';
 
-function GameArea({ setStartGame }) {
+
+
+function GameArea( setStartGame ) {
 	const score = 0;
 	const highScore = 300;
 
@@ -36,6 +39,7 @@ function GameArea({ setStartGame }) {
 					overflow: 'hidden',
 				}}
 			>
+
 				<PlayerMovement />
 
 				{maze.map((row, i) =>
@@ -44,18 +48,29 @@ function GameArea({ setStartGame }) {
 							key={`${i} - ${j}`}
 							style={{
 //								border: '1px solid white',
-								border: '1px',
+// 								border: '1px',
 								display: 'flex',
 								placeContent: 'center center',
 								alignContent: 'center',
 								alignItems: 'center',
-//								backgroundColor: col === 1 ? 'green' : 'transparent',								
-								backgroundColor: col === 1 ? 'green' : 'white',
-
+								backgroundColor: col === 1 ? 'green' : 'transparent',
 							}}
-						></div>
+						>
+							<div
+                                className='PacmanFood'
+                                key={`${i} - ${j}`}
+                                style={{
+                                    height: '2px',
+                                    width: '2px',
+                                    backgroundColor: col === 0 ? 'red' : null,
+                                    borderRadius: '50%',
+
+                                }}
+                            />
+						</div>
 					))
 				)}
+				<YellowDude />
 			</div>
 		</div>
 	);

@@ -48,17 +48,21 @@
 	padding: 20px;
 	box-sizing: border-box;
 	overflow: hidden;
+	display: flex;
+	align-items: center;
 }
 
-.path::after {
-	content: '';
-	position: absolute;
-	display: block;
-	border-top: 12px dotted #fff;
-	width: 90%;
-	top: 50%;
-	left: 5%;
-	margin-top: -6px;
+.dots {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.dots .dot {
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	filter: drop-shadow(0 0 5px #ccc);
 }
 
 .pacman {
@@ -82,14 +86,14 @@
 	border-radius: 50%;
 	border-right-color: transparent;
 	border-bottom-color: transparent;
-	animation: mouthTop 0.7s ease infinite;
+	animation: mouthTop 0.5s ease infinite;
 }
 
 .pacman::after {
 	border-color: yellow;
 	border-right-color: transparent;
 	border-top-color: transparent;
-	animation: mouthBottom 0.7s ease infinite;
+	animation: mouthBottom 0.5s ease infinite;
 }
 
 .ghost {
@@ -137,7 +141,7 @@
 .floating-ghost .ghost,
 .floating-ghost .ghost2 {
 	position: absolute;
-	background-color: white;
+	background-color: hotpink;
 	width: 60px;
 	height: 70px;
 	z-index: 20;
@@ -260,12 +264,6 @@
 @keyframes mouthBottom {
 	50% {
 		transform: rotate(-44deg);
-	}
-}
-
-@keyframes blinking {
-	50% {
-		background-color: hotpink;
 	}
 }
 
