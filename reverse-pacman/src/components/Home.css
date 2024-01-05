@@ -28,6 +28,8 @@
 .home-start-button,
 .home-howTo-button {
 	background-color: red;
+	padding: 10px 20px;
+	font-size: 18px;
 	margin: 20px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
@@ -46,17 +48,21 @@
 	padding: 20px;
 	box-sizing: border-box;
 	overflow: hidden;
+	display: flex;
+	align-items: center;
 }
 
-.path::after {
-	content: '';
-	position: absolute;
-	display: block;
-	border-top: 12px dotted #fff;
-	width: 90%;
-	top: 50%;
-	left: 5%;
-	margin-top: -6px;
+.dots {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.dots .dot {
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	filter: drop-shadow(0 0 5px #ccc);
 }
 
 .pacman {
@@ -64,7 +70,7 @@
 	z-index: 99;
 	top: 50%;
 	left: -20%;
-	animation: moveForward 5s linear infinite;
+	animation: moveForward 5s linear;
 	animation-delay: 1s;
 }
 
@@ -80,32 +86,35 @@
 	border-radius: 50%;
 	border-right-color: transparent;
 	border-bottom-color: transparent;
-	animation: mouthTop 0.7s ease infinite;
+	animation: mouthTop 0.5s ease infinite;
 }
 
 .pacman::after {
 	border-color: yellow;
 	border-right-color: transparent;
 	border-top-color: transparent;
-	animation: mouthBottom 0.7s ease infinite;
+	animation: mouthBottom 0.5s ease infinite;
 }
 
 .ghost {
 	position: absolute;
 	z-index: 99;
 	top: 50%;
-	left: 20%;
+	right: -20%;
 	width: 60px;
 	height: 70px;
 	margin-top: -35px;
 	background-color: red;
 	border-top-left-radius: 70px;
 	border-top-right-radius: 70px;
-	animation: moveForward 5s linear infinite, blinking 0.4s linear infinite;
+	animation: moveGhost 6s linear, blinking 0.4s linear infinite;
+	animation-delay: 2.5s;
 }
 
 .ghost::before,
-.ghost::after {
+.ghost::after,
+.ghost2::before,
+.ghost2::after {
 	content: '';
 	position: absolute;
 	background-color: white;
@@ -116,8 +125,46 @@
 	left: 4px;
 }
 
-.ghost::after {
+.ghost::after,
+.ghost2::after {
 	left: 28px;
+}
+
+.floating-ghost {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	height: 50%;
+}
+
+.floating-ghost .ghost,
+.floating-ghost .ghost2 {
+	position: absolute;
+	background-color: hotpink;
+	width: 60px;
+	height: 70px;
+	z-index: 20;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: moveGhost 6s linear 2.5s infinite, blinking 0.4s linear infinite,
+		bouncing 1s ease-in-out infinite;
+	right: 50%;
+	border-top-left-radius: 70px;
+	border-top-right-radius: 70px;
+}
+
+.floating-ghost .ghost:hover,
+.floating-ghost .ghost2:hover {
+	animation-play-state: paused; /* Optional: Pauses the animation on hover */
+}
+.floating-ghost .ghost {
+	margin-right: 40px;
+}
+
+.floating-ghost .ghost2 {
+	left: 50px;
 }
 
 .eyes::before,
@@ -143,18 +190,35 @@
 	position: absolute;
 	width: 0;
 	height: 0;
-	border: solid 10px#333;
+	border: solid 10px #333;
 	border-top-color: transparent;
 	bottom: -10px;
 }
 
-.skirt::before {
+.skirt::before,
+.floating-ghost .skirt::before {
 	content: '';
 	left: 10px;
 }
 .skirt::after {
 	content: '';
 	left: 30px;
+}
+
+.floating-ghost .skirt,
+.floating-ghost .skirt::before,
+.floating-ghost .skirt::after {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: solid 10px black;
+	border-top-color: transparent;
+	bottom: -10px;
+}
+
+.floating-ghost .skirt::after {
+	content: '';
+	left: -30px;
 }
 
 @media (max-width: 600px) {
@@ -167,9 +231,27 @@
 @keyframes moveForward {
 	0% {
 		left: -20%;
+		transform: rotate(0deg);
+	}
+	40% {
+		transform: rotateY(0deg);
+	}
+	50% {
+		left: 50%;
+		transform: rotateY(180deg);
 	}
 	100% {
-		left: 100%;
+		left: 0%;
+		transform: rotateY(180deg);
+	}
+}
+
+@keyframes moveGhost {
+	0% {
+		right: -20%;
+	}
+	100% {
+		right: 100%;
 	}
 }
 
@@ -185,8 +267,12 @@
 	}
 }
 
-@keyframes blinking {
+@keyframes bouncing {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
 	50% {
-		background-color: hotpink;
+		transform: translateY(-20px);
 	}
 }
