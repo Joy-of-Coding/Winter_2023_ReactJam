@@ -50,7 +50,19 @@ function GameArea({ setStartGame }) {
 								alignItems: 'center',
 								backgroundColor: col === 1 ? 'green' : 'transparent',
 							}}
-						></div>
+						>
+							<div
+                                className='PacmanFood'
+                                key={`${i} - ${j}`}
+                                style={{
+                                    height: '2px',
+                                    width: '2px',
+                                    backgroundColor: col === 0 ? 'red' : null,
+                                    borderRadius: '50%',
+
+                                }} 
+                            />
+						</div>
 					))
 				)}
 			</div>
