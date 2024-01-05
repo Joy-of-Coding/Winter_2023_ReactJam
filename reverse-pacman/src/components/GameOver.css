@@ -1,0 +1,9 @@
+.gameOver {
+    color: blue;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 300px;
+    border: 4px red solid;
+    margin: 20px auto;
+}
