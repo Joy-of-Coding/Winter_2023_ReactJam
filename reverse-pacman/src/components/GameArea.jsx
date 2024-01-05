@@ -5,7 +5,7 @@ import YellowDude from './YellowDude.jsx';
 
 
 
-function GameArea({ setStartGame }) {
+function GameArea( setStartGame ) {
 	const score = 0;
 	const highScore = 300;
 
@@ -39,8 +39,9 @@ function GameArea({ setStartGame }) {
 					overflow: 'hidden',
 				}}
 			>
-	
+
 				<PlayerMovement />
+
 				{maze.map((row, i) =>
 					row.map((col, j) => (
 						<div
@@ -53,8 +54,19 @@ function GameArea({ setStartGame }) {
 								alignItems: 'center',
 								backgroundColor: col === 1 ? 'green' : 'transparent',
 							}}
-						></div>
-					
+						>
+							<div
+                                className='PacmanFood'
+                                key={`${i} - ${j}`}
+                                style={{
+                                    height: '2px',
+                                    width: '2px',
+                                    backgroundColor: col === 0 ? 'red' : null,
+                                    borderRadius: '50%',
+
+                                }}
+                            />
+						</div>
 					))
 				)}
 				<YellowDude />
