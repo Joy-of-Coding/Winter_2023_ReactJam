@@ -55,10 +55,19 @@ function GameArea( setStartGame ) {
 							key={`${i} - ${j}`}
 							style={{
 								// border: '1px solid white',
-								display: 'flex',
-								placeContent: 'center center',
-								alignContent: 'center',
-								alignItems: 'center',
+								// think absolute positioning is the kye to getting ghosts & pacman to align
+								// display: 'flex',
+								// placeContent: 'center center',
+								// alignContent: 'center',
+								// alignItems: 'center',
+
+								top: i * cellSize + 'px', //row
+								// left: players.player1.left + -3.5 + 'px',
+								left:  j * cellSize + 'px', // column left edge
+
+								width: cellSize + 'px',
+								height: cellSize + 'px',
+								position: 'absolute',
 								backgroundColor: col === 1 ? 'green' : 'transparent',
 							}}
 						>
