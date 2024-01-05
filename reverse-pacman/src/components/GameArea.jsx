@@ -40,17 +40,18 @@ function GameArea( setStartGame ) {
 			</div>
 			<div
 				className='board'
-				style={{
+				//no inline styling needed now~
+				// style={{
 
-					width:  boardWidth,
-					height: boardHeight,
+					// width:  boardWidth,
+					// height: boardHeight,
 
 					// display: 'grid',
 					// gridTemplateColumns: `repeat(${boardColumns}, 1fr)`,
 					// gridTemplateRows: `repeat(${boardRows}, 1fr)`,
-					backgroundColor: 'midnightblue',
+
 					// overflow: 'hidden',  //shouldn't need this if math is correct and board size calc from maze
-				}}
+				/*}}*/
 			>
 
 
@@ -93,7 +94,7 @@ function GameArea( setStartGame ) {
 					))
 				)}
 				<PlayerMovement boardColumns={boardColumns} boardRows={boardRows} cellSize={cellSize}/>
-				<YellowDude />
+				<YellowDude boardColumns={boardColumns} boardRows={boardRows} cellSize={cellSize}/>
 			</div>
 		</div>
 	);
