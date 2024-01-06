@@ -125,4 +125,16 @@ export const maze = [
 	],
 ];
 
-export default maze;
+const transformedMaze = maze.map((row) =>
+	row.map((cell) => {
+		if (cell === 1) {
+			// If the cell is a wall
+			return { type: 'wall' };
+		} else {
+			// If the cell is a path with a dot
+			return { type: 'path', hasDot: true };
+		}
+	})
+);
+
+export default transformedMaze;

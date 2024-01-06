@@ -1,29 +1,21 @@
 import { useState, useEffect } from 'react';
 import maze from '../utils/data';
 
-
-
 // all const prior to this line are used only to calc cell size
 //this is the calculated cell size from board dimensions from Game Area
 // const cellSize = 14.161290322580646
-function PlayerMovement({cellSize, boardRows, boardColumns}) {  //this is correct react syntax despite linting error
+function PlayerMovement({
+	cellSize,
+	boardRows,
+	boardColumns,
+	players,
+	setPlayers,
+}) {
+	//this is correct react syntax despite linting error
 
-	//pulling all constants to top of component.  may be pulled up to game component
-	const player1Start = {top: 15, left: 13}
-	const player2Start = {top: 15, left: 14}
 	// const boardRows = maze.length;
 	// const boardColumns = maze[0].length;
 	const pixelToGrid = (pixel) => Math.floor(pixel / cellSize);
-
-	const initialPlayerPositions = {
-		// player1: { top: 15 * cellSize, left: 13 * cellSize }, // for maze[15][13]
-		// player2: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]
-
-		player1: { top: player1Start.top * cellSize, left: player1Start.left * cellSize }, // for maze[15][13]
-		player2: { top: player2Start.top * cellSize, left: player2Start.left * cellSize }, // for maze[15][14]
-	};
-
-	const [players, setPlayers] = useState(initialPlayerPositions);
 
 	// Check if a move is valid
 	const canMoveTo = (newGridRow, newGridCol) => {
@@ -32,7 +24,7 @@ function PlayerMovement({cellSize, boardRows, boardColumns}) {  //this is correc
 			newGridRow < boardRows &&
 			newGridCol >= 0 &&
 			newGridCol < boardColumns &&
-			maze[newGridRow][newGridCol] === 0
+			maze[newGridRow][newGridCol].type === 'path'
 		);
 	};
 
@@ -43,6 +35,20 @@ function PlayerMovement({cellSize, boardRows, boardColumns}) {  //this is correc
 		if (direction === 'down') top += cellSize;
 		if (direction === 'left') left -= cellSize;
 		if (direction === 'right') left += cellSize;
+
+		// Wrap around horizontally
+		if (left < 0) {
+			left = (boardColumns - 1) * cellSize; // Wrap to right side
+		} else if (left >= boardColumns * cellSize) {
+			left = 0; // Wrap to left side
+		}
+
+		// Wrap around vertically (optional)
+		if (top < 0) {
+			top = (boardRows - 1) * cellSize; // Wrap to bottom
+		} else if (top >= boardRows * cellSize) {
+			top = 0; // Wrap to top
+		}
 
 		if (canMoveTo(pixelToGrid(top), pixelToGrid(left))) {
 			setPlayers((prev) => ({ ...prev, [player]: { top, left } }));
@@ -112,7 +118,7 @@ function PlayerMovement({cellSize, boardRows, boardColumns}) {  //this is correc
 					position: 'absolute',
 					backgroundColor: 'cyan',
 				}}
-			/>			
+			/>
 		</>
 	);
 }
