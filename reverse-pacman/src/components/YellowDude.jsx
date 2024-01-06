@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react';
 import maze from '../utils/data';
 
-function YellowDude({ boardRows, boardColumns, cellSize, updateMazeState }) {
+function YellowDude({
+	boardRows,
+	boardColumns,
+	cellSize,
+	updateMazeState,
+	isGameOver,
+	setIsGameOver,
+	score,
+	setScore,
+}) {
 	const pixelToGrid = (pixel) => Math.floor(pixel / cellSize);
 	const pacmanStart = { top: 14, left: 1 };
 	const [target, setTarget] = useState(null);
@@ -14,7 +23,6 @@ function YellowDude({ boardRows, boardColumns, cellSize, updateMazeState }) {
 	function getNeighbors(maze, position) {
 		const [row, col] = position;
 		const neighbors = [];
-		console.log(neighbors);
 
 		// Directions: Up, Right, Down, Left
 		const directions = [
@@ -110,8 +118,15 @@ function YellowDude({ boardRows, boardColumns, cellSize, updateMazeState }) {
 		return closestDot;
 	};
 
+	// Function to check if all dots are eaten
+	const checkAllDotsEaten = () => {
+		return maze.every((row) =>
+			row.every((cell) => cell.type !== 'path' || !cell.hasDot)
+		);
+	};
+
 	const movePacman = () => {
-		if (path && path.length > 0) {
+		if (!isGameOver && path && path.length > 0) {
 			let nextPosition = path.shift();
 			const [nextRow, nextCol] = nextPosition;
 
@@ -129,8 +144,12 @@ function YellowDude({ boardRows, boardColumns, cellSize, updateMazeState }) {
 
 			if (maze[nextRow][nextCol] && maze[nextRow][nextCol].hasDot) {
 				updateMazeState(nextRow, nextCol); // Consume the dot
+				setScore((prevState) => prevState + 40);
+				if (checkAllDotsEaten()) {
+					setIsGameOver(true); // Set game over if all dots are eaten
+				}
 			}
-		} else {
+		} else if (!isGameOver) {
 			const newTarget = findClosestDot();
 			if (newTarget) {
 				setTarget(newTarget);
@@ -160,14 +179,6 @@ function YellowDude({ boardRows, boardColumns, cellSize, updateMazeState }) {
 	}, []);
 
 	useEffect(() => {
-		// Set an interval for Pac-Man movement
-		const intervalId = setInterval(movePacman, 100); // Adjust the interval as needed
-
-		// Clear the interval when the component unmounts
-		return () => clearInterval(intervalId);
-	}, [path]); // Dependencies: The movePacman function should be triggered when the path changes
-
-	useEffect(() => {
 		// Initialize DFS from Pac-Man's position to find a path to the target
 		const initialPath = dfsFindPath(
 			maze,
@@ -177,6 +188,22 @@ function YellowDude({ boardRows, boardColumns, cellSize, updateMazeState }) {
 
 		setPath(initialPath);
 	}, [target]);
+
+	useEffect(() => {
+		if (target) {
+			const initialPath = dfsFindPath(
+				maze,
+				[pixelToGrid(pacmanPosition.top), pixelToGrid(pacmanPosition.left)],
+				target
+			);
+			setPath(initialPath);
+		}
+	}, [target]);
+
+	useEffect(() => {
+		const intervalId = setInterval(movePacman, 10);
+		return () => clearInterval(intervalId);
+	}, [path, isGameOver]);
 
 	return (
 		<>

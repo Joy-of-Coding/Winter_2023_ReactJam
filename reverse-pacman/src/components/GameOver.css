@@ -1,0 +1,8 @@
+.gameOver {
+	width: 100%;
+	position: absolute;
+	margin: auto;
+	background-color: black;
+	padding: 30px;
+	margin-top: 35%;
+}
