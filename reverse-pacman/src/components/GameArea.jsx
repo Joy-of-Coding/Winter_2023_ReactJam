@@ -87,14 +87,14 @@ function GameArea({setStartGame}) {
 		>
 			<div className='score'>
 				<div>
-					<p>TOP</p>
+					<p> CURRENT</p>
 					<p>{score}</p>
 				</div>
 				<div>
 					<button onClick={() => setStartGame(false)}>Home</button>
 				</div>
 				<div>
-					<p>TOP</p>
+					<p> RECORD</p>
 					<p>{highScore_in_storage}</p>
 				</div>
 			</div>
