@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './GameArea.css';
 import GameOver from './GameOver.jsx';
 import PlayerMovement from './PlayerMovement.jsx';
@@ -5,12 +6,12 @@ import transformedMaze from '../utils/data.js';
 import YellowDude from './YellowDude.jsx';
 import { useState, useEffect } from 'react';
 
-function GameArea(setStartGame) {
+function GameArea({setStartGame}) {
 	//all constants pulled to top of Game Area
 	const [maze, setMaze] = useState(transformedMaze); // Initialize maze state at the top
 
 	const cellSize = 15;
-	const [score, setScore] = useState(0);
+	const [score, setScore] = useState(1280);
 	const [highScore, setHighScore] = useState(0);
 
 	const highScore_in_storage = JSON.parse(localStorage.getItem('high_score'));
@@ -69,7 +70,7 @@ function GameArea(setStartGame) {
 				setHighScore(score);
 			}
 			//  Update the high score if score is < current high score
-			else if (score < highScore_in_storage) {
+			else if (score > highScore_in_storage) {
 				JSON.stringify(localStorage.setItem('high_score', score));
 			}
 		}
@@ -86,14 +87,14 @@ function GameArea(setStartGame) {
 		>
 			<div className='score'>
 				<div>
-					<p>TOP</p>
+					<p> CURRENT</p>
 					<p>{score}</p>
 				</div>
 				<div>
 					<button onClick={() => setStartGame(false)}>Home</button>
 				</div>
 				<div>
-					<p>TOP</p>
+					<p> RECORD</p>
 					<p>{highScore_in_storage}</p>
 				</div>
 			</div>

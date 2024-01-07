@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './GameOver.css';
 
 function GameOver({ score, highScore_in_storage }) {

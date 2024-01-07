@@ -178,7 +178,7 @@ function YellowDude({
 
 			if (maze[nextRow][nextCol] && maze[nextRow][nextCol].hasDot) {
 				updateMazeState(nextRow, nextCol); // Consume the dot
-				setScore((prevState) => prevState + 40);
+				setScore((prevState) => prevState - 4);
 				if (checkAllDotsEaten()) {
 					setIsGameOver(true); // Set game over if all dots are eaten
 				}
