@@ -1,16 +1,24 @@
 import './GameArea.css';
+import GameOver from './GameOver.jsx';
 import PlayerMovement from './PlayerMovement.jsx';
 import transformedMaze from '../utils/data.js';
 import YellowDude from './YellowDude.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function GameArea(setStartGame) {
+	console.log('tran maze: ', transformedMaze);
 	//all constants pulled to top of Game Area
 	const [maze, setMaze] = useState(transformedMaze); // Initialize maze state at the top
 
 	const cellSize = 15;
-	const score = 0;
-	const highScore = 300;
+	const [score, setScore] = useState(0);
+	const [highScore, setHighScore] = useState(0);
+
+	const highScore_in_storage = JSON.parse(localStorage.getItem('high_score'));
+	if (!highScore_in_storage) {
+		JSON.stringify(localStorage.setItem('high_score', highScore));
+	}
+
 	const boardColumns = maze[0].length; // Now maze is initialized
 	const boardRows = maze.length;
 	const boardWidth = boardColumns * cellSize;
@@ -49,6 +57,8 @@ function GameArea(setStartGame) {
 
 	const [players, setPlayers] = useState(initialPlayerPositions);
 
+	const [isGameOver, setIsGameOver] = useState(false);
+
 	const [player1Position, setPlayer1Position] = useState({
 		top: players.player1.top,
 		left: players.player1.left,
@@ -57,6 +67,22 @@ function GameArea(setStartGame) {
 		top: players.player2.top,
 		left: players.player2.left,
 	});
+
+	console.log(isGameOver);
+
+	useEffect(() => {
+		if (isGameOver) {
+			console.log('high score in storage: ', highScore_in_storage);
+
+			if (highScore_in_storage === 0) {
+				setHighScore(score);
+			}
+			//  Update the high score if score is < current high score
+			else if (score < highScore_in_storage) {
+				JSON.stringify(localStorage.setItem('high_score', score));
+			}
+		}
+	}, [isGameOver]);
 
 	return (
 		//set dynamic game area based on board size & cell size
@@ -77,24 +103,10 @@ function GameArea(setStartGame) {
 				</div>
 				<div>
 					<p>TOP</p>
-					<p>{highScore}</p>
+					<p>{highScore_in_storage}</p>
 				</div>
 			</div>
-			<div
-				className='board'
-				//no inline styling needed now~
-				// style={{
-
-				// width:  boardWidth,
-				// height: boardHeight,
-
-				// display: 'grid',
-				// gridTemplateColumns: `repeat(${boardColumns}, 1fr)`,
-				// gridTemplateRows: `repeat(${boardRows}, 1fr)`,
-
-				// overflow: 'hidden',  //shouldn't need this if math is correct and board size calc from maze
-				/*}}*/
-			>
+			<div className='board'>
 				{maze.map((row, i) =>
 					row.map((cell, j) => (
 						<div
@@ -138,7 +150,18 @@ function GameArea(setStartGame) {
 					updateMazeState={updateMazeState}
 					player1Position={player1Position}
 					player2Position={player2Position}
+					isGameOver={isGameOver}
+					setIsGameOver={setIsGameOver}
+					score={score}
+					setScore={setScore}
 				/>
+				{isGameOver && (
+					<GameOver
+						score={score}
+						highScore_in_storage={highScore_in_storage}
+						setHighScore={setHighScore}
+					/>
+				)}
 			</div>
 		</div>
 	);
