@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import './GameOver.css';
 
-function GameOver({ score, highScore_in_storage }) {
+function GameOver({ score, highScore_in_storage, setStartGame }) {
 	console.log('gameover hs: ', highScore_in_storage);
+
 	return (
 		<div className='gameOver'>
 			<h1 className=''>GAME OVER</h1>
@@ -22,6 +23,21 @@ function GameOver({ score, highScore_in_storage }) {
 					HIGH SCORE{' '}
 					<span style={{ color: 'yellow' }}>{highScore_in_storage}</span>
 				</h2>
+			</div>
+			<div>
+				<button
+					style={{
+						marginTop: '30px',
+						padding: '5px 20px',
+						fontSize: '14px',
+					}}
+					onClick={() => {
+						setStartGame(false);
+						window.location.reload(true);
+					}}
+				>
+					Home
+				</button>
 			</div>
 		</div>
 	);
