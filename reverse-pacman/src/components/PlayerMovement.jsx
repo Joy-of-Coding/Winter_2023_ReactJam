@@ -51,7 +51,12 @@ function PlayerMovement({
 		}
 
 		if (canMoveTo(pixelToGrid(top), pixelToGrid(left))) {
-			setPlayers((prev) => ({ ...prev, [player]: { top, left } }));
+			setPlayers((prev) => {
+				const newPlayers = { ...prev };
+				newPlayers[player] = { top, left };
+				return newPlayers;
+			});
+			console.log('players: ', players);
 		}
 	};
 
@@ -90,6 +95,10 @@ function PlayerMovement({
 		document.addEventListener('keydown', characterMovement);
 		return () => document.removeEventListener('keydown', characterMovement);
 	}, [players]);
+
+	// useEffect(() => {
+	// 	console.log('Updated players state:', players);
+	// }, [players]);
 
 	return (
 		<>

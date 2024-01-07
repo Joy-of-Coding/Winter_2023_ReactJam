@@ -6,7 +6,6 @@ import YellowDude from './YellowDude.jsx';
 import { useState, useEffect } from 'react';
 
 function GameArea(setStartGame) {
-	console.log('tran maze: ', transformedMaze);
 	//all constants pulled to top of Game Area
 	const [maze, setMaze] = useState(transformedMaze); // Initialize maze state at the top
 
@@ -41,39 +40,31 @@ function GameArea(setStartGame) {
 	// const boardRows = maze.length;
 	// const boardColumns = maze[0].length;
 
-	const initialPlayerPositions = {
-		// player1: { top: 15 * cellSize, left: 13 * cellSize }, // for maze[15][13]
-		// player2: { top: 15 * cellSize, left: 14.5 * cellSize }, // for maze[15][14]
-
+	const [players, setPlayers] = useState({
 		player1: {
 			top: player1Start.top * cellSize,
 			left: player1Start.left * cellSize,
-		}, // for maze[15][13]
+		},
 		player2: {
 			top: player2Start.top * cellSize,
 			left: player2Start.left * cellSize,
-		}, // for maze[15][14]
-	};
-
-	const [players, setPlayers] = useState(initialPlayerPositions);
+		},
+	});
 
 	const [isGameOver, setIsGameOver] = useState(false);
 
-	const [player1Position, setPlayer1Position] = useState({
-		top: players.player1.top,
-		left: players.player1.left,
-	});
-	const [player2Position, setPlayer2Position] = useState({
-		top: players.player2.top,
-		left: players.player2.left,
-	});
-
-	console.log(isGameOver);
+	// const [player1Position, setPlayer1Position] = useState({
+	// 	top: players.player1.top,
+	// 	left: players.player1.left,
+	// });
+	// // console.log('player1 pos: ', player1Position);
+	// const [player2Position, setPlayer2Position] = useState({
+	// 	top: players.player2.top,
+	// 	left: players.player2.left,
+	// });
 
 	useEffect(() => {
 		if (isGameOver) {
-			console.log('high score in storage: ', highScore_in_storage);
-
 			if (highScore_in_storage === 0) {
 				setHighScore(score);
 			}
@@ -148,8 +139,8 @@ function GameArea(setStartGame) {
 					boardColumns={boardColumns}
 					cellSize={cellSize}
 					updateMazeState={updateMazeState}
-					player1Position={player1Position}
-					player2Position={player2Position}
+					player1Position={players.player1}
+					player2Position={players.player2}
 					isGameOver={isGameOver}
 					setIsGameOver={setIsGameOver}
 					score={score}

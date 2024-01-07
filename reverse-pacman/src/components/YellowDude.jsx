@@ -10,6 +10,8 @@ function YellowDude({
 	setIsGameOver,
 	score,
 	setScore,
+	player1Position,
+	player2Position,
 }) {
 	const pixelToGrid = (pixel) => Math.floor(pixel / cellSize);
 	const pacmanStart = { top: 14, left: 1 };
@@ -125,11 +127,25 @@ function YellowDude({
 		);
 	};
 
+	// Function to check for collision
+	function checkCollision(playerPosition, pacmanPosition) {
+		// Convert pixel positions to grid positions for comparison
+		const playerGridPosition = {
+			top: pixelToGrid(playerPosition.top),
+			left: pixelToGrid(playerPosition.left),
+		};
+
+		// Comparing grid positions for collision
+		return (
+			playerGridPosition.top === pacmanPosition.top &&
+			playerGridPosition.left === pacmanPosition.left
+		);
+	}
+
 	const movePacman = () => {
 		if (!isGameOver && path && path.length > 0) {
 			let nextPosition = path.shift();
 			const [nextRow, nextCol] = nextPosition;
-
 			// Wrap-around logic for left and right edges
 			if (nextCol < 0) {
 				nextPosition = [nextRow, maze[0].length - 1]; // Wrap to right side
@@ -137,10 +153,28 @@ function YellowDude({
 				nextPosition = [nextRow, 0]; // Wrap to left side
 			}
 
-			setPacmanPosition({
+			// Update the position of pacman
+			const newPacmanPosition = {
 				top: nextPosition[0] * cellSize,
 				left: nextPosition[1] * cellSize,
-			});
+			};
+
+			// Set the new position
+			setPacmanPosition(newPacmanPosition);
+
+			// Convert pacman's pixel position to grid position for collision check
+			const pacmanGridPosition = {
+				top: nextPosition[0],
+				left: nextPosition[1],
+			};
+
+			// Check for collisions
+			if (
+				checkCollision(player1Position, pacmanGridPosition) ||
+				checkCollision(player2Position, pacmanGridPosition)
+			) {
+				setIsGameOver(true);
+			}
 
 			if (maze[nextRow][nextCol] && maze[nextRow][nextCol].hasDot) {
 				updateMazeState(nextRow, nextCol); // Consume the dot
@@ -201,10 +235,9 @@ function YellowDude({
 	}, [target]);
 
 	useEffect(() => {
-		const intervalId = setInterval(movePacman, 10);
+		const intervalId = setInterval(movePacman, 100); // Adjusted interval
 		return () => clearInterval(intervalId);
-	}, [path, isGameOver]);
-
+	}, [path, isGameOver, player1Position, player2Position]);
 	return (
 		<>
 			<div //pacman arrives //
