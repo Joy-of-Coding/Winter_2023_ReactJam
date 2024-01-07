@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import maze from '../utils/data';
 import MunchSound from '../assets/pacman_chomp.wav';
 import DeathSound from '../assets/pacman_death.wav';
+import './PlayerMovement.css';
 
+import PlayerMovement from './PlayerMovement';
 function YellowDude({
 	boardRows,
 	boardColumns,
@@ -161,7 +163,7 @@ function YellowDude({
 			if (maze[nextRow][nextCol] && maze[nextRow][nextCol].hasDot) {
 				updateMazeState(nextRow, nextCol); // Consume the dot
 				setScore((prevState) => prevState - 4);
-				munchSound.play(); // Play munch sound
+				munchSound.play();
 
 				if (checkAllDotsEaten()) {
 					setIsGameOver(true);
@@ -257,14 +259,13 @@ function YellowDude({
 	return (
 		<>
 			<div //pacman arrives //
-				className='element'
+				className='pac'
 				style={{
 					top: pacmanPosition.top + 'px',
 					left: pacmanPosition.left + 'px',
 					width: cellSize + 'px',
 					height: cellSize + 'px',
 					position: 'absolute',
-					backgroundColor: 'yellow',
 				}}
 			/>
 		</>
