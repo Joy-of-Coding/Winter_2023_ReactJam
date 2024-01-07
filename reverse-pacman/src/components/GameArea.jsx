@@ -4,7 +4,9 @@ import GameOver from './GameOver.jsx';
 import PlayerMovement from './PlayerMovement.jsx';
 import transformedMaze from '../utils/data.js';
 import YellowDude from './YellowDude.jsx';
-import { useState, useEffect, Children } from 'react';
+import { useState, useEffect } from 'react';
+import MunchSound from '../assets/pacman_chomp.wav';
+import DeathSound from '../assets/pacman_death.wav';
 
 function GameArea({ setStartGame }) {
 	//all constants pulled to top of Game Area
