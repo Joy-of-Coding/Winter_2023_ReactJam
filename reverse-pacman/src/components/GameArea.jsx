@@ -4,11 +4,11 @@ import GameOver from './GameOver.jsx';
 import PlayerMovement from './PlayerMovement.jsx';
 import transformedMaze from '../utils/data.js';
 import YellowDude from './YellowDude.jsx';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Children } from 'react';
 
-function GameArea({setStartGame}) {
+function GameArea({ setStartGame }) {
 	//all constants pulled to top of Game Area
-	const [maze, setMaze] = useState(transformedMaze); // Initialize maze state at the top
+	const [maze, setMaze] = useState(transformedMaze);
 
 	const cellSize = 15;
 	const [score, setScore] = useState(1280);
@@ -38,8 +38,6 @@ function GameArea({setStartGame}) {
 
 	const player1Start = { top: 15, left: 13 };
 	const player2Start = { top: 15, left: 14 };
-	// const boardRows = maze.length;
-	// const boardColumns = maze[0].length;
 
 	const [players, setPlayers] = useState({
 		player1: {
@@ -54,16 +52,6 @@ function GameArea({setStartGame}) {
 
 	const [isGameOver, setIsGameOver] = useState(false);
 
-	// const [player1Position, setPlayer1Position] = useState({
-	// 	top: players.player1.top,
-	// 	left: players.player1.left,
-	// });
-	// // console.log('player1 pos: ', player1Position);
-	// const [player2Position, setPlayer2Position] = useState({
-	// 	top: players.player2.top,
-	// 	left: players.player2.left,
-	// });
-
 	useEffect(() => {
 		if (isGameOver) {
 			if (highScore_in_storage === 0) {
@@ -77,7 +65,6 @@ function GameArea({setStartGame}) {
 	}, [isGameOver]);
 
 	return (
-		//set dynamic game area based on board size & cell size
 		<div
 			className='gameArea'
 			style={{
@@ -90,9 +77,7 @@ function GameArea({setStartGame}) {
 					<p> CURRENT</p>
 					<p>{score}</p>
 				</div>
-				<div>
-					<button onClick={() => setStartGame(false)}>Home</button>
-				</div>
+
 				<div>
 					<p> RECORD</p>
 					<p>{highScore_in_storage}</p>
@@ -152,6 +137,7 @@ function GameArea({setStartGame}) {
 						score={score}
 						highScore_in_storage={highScore_in_storage}
 						setHighScore={setHighScore}
+						setStartGame={setStartGame}
 					/>
 				)}
 			</div>
