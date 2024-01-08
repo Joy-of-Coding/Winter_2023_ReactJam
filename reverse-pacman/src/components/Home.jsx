@@ -1,13 +1,19 @@
 import './Home.css';
 import { useState, useEffect } from 'react';
+import HowToPlay from "./HowToPlay.jsx";
 
 const Home = ({ setStartGame }) => {
 	const [showGameControls, setShowGameControls] = useState(false);
 	const [dotsVisibility, setDotsVisibility] = useState(Array(21).fill(true));
+	const [showHowTo, setShowHowTo] = useState(false)
 
 	const startGame = () => {
 		setStartGame(true);
 	};
+
+	const handleHowTo = () => {
+		setShowHowTo(true)
+	}
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -44,6 +50,7 @@ const Home = ({ setStartGame }) => {
 
 	return (
 		<div className='home-container'>
+			<HowToPlay showHowTo={showHowTo} setShowHowTo={setShowHowTo} />
 			<div className='home-title-container'>
 				<h1>Pac-Man</h1>
 				<p>(Reversed)</p>
@@ -87,8 +94,9 @@ const Home = ({ setStartGame }) => {
 				<button className='home-start-button' onClick={startGame}>
 					Start Game
 				</button>
-				<button className='home-howTo-button'>How To Play</button>
+				<button className='home-howTo-button' onClick={handleHowTo}>How To Play</button>
 			</div>
+
 		</div>
 	);
 };
