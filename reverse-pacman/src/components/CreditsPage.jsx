@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import './GameOver.css';
 
-function CreditsPage({ {/*highScore_in_storage,*/}, setOpenCredits }) {
-	console.log('gameover hs: ', highScore_in_storage);
+function CreditsPage({  setOpenCredits }) {
 
 	return (
 		<div className='gameOver'>
@@ -18,7 +17,6 @@ function CreditsPage({ {/*highScore_in_storage,*/}, setOpenCredits }) {
 			>
 				<h2 className=''>
 					HIGH SCORE{' '}
-					<span style={{ color: 'yellow' }}>{highScore_in_storage}</span>
 				</h2>
 				<h2 className=''>
 					Credits: Hello there
