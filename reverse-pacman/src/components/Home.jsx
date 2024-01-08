@@ -1,9 +1,33 @@
 import './Home.css';
 import { useState, useEffect } from 'react';
+import { RxSpeakerLoud, RxSpeakerOff } from 'react-icons/rx';
+import IntroSound from '../assets/pacman_beginning.wav';
 
-const Home = ({setStartGame}) => {
+const Home = ({ setStartGame }) => {
+	const [audio] = useState(new Audio(IntroSound));
+	const [isMuted, setIsMuted] = useState(true);
 	const [showGameControls, setShowGameControls] = useState(false);
 	const [dotsVisibility, setDotsVisibility] = useState(Array(21).fill(true));
+
+	useEffect(() => {
+		audio.muted = isMuted;
+		audio.play().catch((e) => console.error('Error playing audio:', e));
+
+		audio.loop = true;
+
+		return () => {
+			audio.pause();
+		};
+	}, [isMuted, audio]);
+
+	const toggleMute = () => {
+		setIsMuted(!isMuted);
+	};
+
+	const startGame = () => {
+		audio.pause();
+		setStartGame(true);
+	};
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -40,6 +64,19 @@ const Home = ({setStartGame}) => {
 
 	return (
 		<div className='home-container'>
+			<div
+				style={{
+					outline: 'none',
+					position: 'absolute',
+					top: 0,
+					right: 0,
+					cursor: 'pointer',
+					fontSize: '30px',
+				}}
+				onClick={toggleMute}
+			>
+				{isMuted ? <RxSpeakerOff /> : <RxSpeakerLoud />}
+			</div>
 			<div className='home-title-container'>
 				<h1>Pac-Man</h1>
 				<p>(Reversed)</p>
@@ -80,10 +117,7 @@ const Home = ({setStartGame}) => {
 			)}
 
 			<div className='home-buttons-container'>
-				<button
-					className='home-start-button'
-					onClick={() => setStartGame(true)}
-				>
+				<button className='home-start-button' onClick={startGame}>
 					Start Game
 				</button>
 				<button className='home-howTo-button'>How To Play</button>

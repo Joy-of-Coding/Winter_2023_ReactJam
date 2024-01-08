@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import maze from '../utils/data';
+import MunchSound from '../assets/pacman_chomp.wav';
+import DeathSound from '../assets/pacman_death.wav';
+import './PlayerMovement.css';
 
+import PlayerMovement from './PlayerMovement';
 function YellowDude({
 	boardRows,
 	boardColumns,
@@ -21,6 +25,9 @@ function YellowDude({
 		top: pacmanStart.top * cellSize,
 		left: pacmanStart.left * cellSize,
 	});
+
+	const munchSound = new Audio(MunchSound);
+	const deathSound = new Audio(DeathSound);
 
 	function getNeighbors(maze, position) {
 		const [row, col] = position;
@@ -153,6 +160,16 @@ function YellowDude({
 				nextPosition = [nextRow, 0]; // Wrap to left side
 			}
 
+			if (maze[nextRow][nextCol] && maze[nextRow][nextCol].hasDot) {
+				updateMazeState(nextRow, nextCol); // Consume the dot
+				setScore((prevState) => prevState - 4);
+				munchSound.play();
+
+				if (checkAllDotsEaten()) {
+					setIsGameOver(true);
+				}
+			}
+
 			// Update the position of pacman
 			const newPacmanPosition = {
 				top: nextPosition[0] * cellSize,
@@ -174,6 +191,7 @@ function YellowDude({
 				checkCollision(player2Position, pacmanGridPosition)
 			) {
 				setIsGameOver(true);
+				deathSound.play();
 			}
 
 			if (maze[nextRow][nextCol] && maze[nextRow][nextCol].hasDot) {
@@ -241,14 +259,13 @@ function YellowDude({
 	return (
 		<>
 			<div //pacman arrives //
-				className='element'
+				className='pac'
 				style={{
 					top: pacmanPosition.top + 'px',
 					left: pacmanPosition.left + 'px',
 					width: cellSize + 'px',
 					height: cellSize + 'px',
 					position: 'absolute',
-					backgroundColor: 'yellow',
 				}}
 			/>
 		</>

@@ -1,0 +1,39 @@
+.element {
+	position: absolute;
+	z-index: 10;
+	border-top-left-radius: 70px;
+	border-top-right-radius: 70px;
+}
+
+.pac::before,
+.pac::after {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border: solid 8px yellow;
+	border-radius: 50%;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	animation: mouthTop 0.5s ease infinite;
+}
+
+.pac::after {
+	border-color: yellow;
+	border-right-color: transparent;
+	border-top-color: transparent;
+	animation: mouthBottom 0.5s ease infinite;
+}
+
+@keyframes mouthTop {
+	50% {
+		transform: rotate(44deg);
+	}
+}
+
+@keyframes mouthBottom {
+	50% {
+		transform: rotate(-44deg);
+	}
+}

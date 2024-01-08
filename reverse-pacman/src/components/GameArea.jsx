@@ -4,7 +4,7 @@ import GameOver from './GameOver.jsx';
 import PlayerMovement from './PlayerMovement.jsx';
 import transformedMaze from '../utils/data.js';
 import YellowDude from './YellowDude.jsx';
-import { useState, useEffect, Children } from 'react';
+import { useState, useEffect } from 'react';
 
 function GameArea({ setStartGame }) {
 	//all constants pulled to top of Game Area
