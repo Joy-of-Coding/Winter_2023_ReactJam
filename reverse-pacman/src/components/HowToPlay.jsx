@@ -1,4 +1,6 @@
 import './HowToPlay.css'
+import './Home.css'
+
 function HowToPlay({showHowTo, setShowHowTo}) {
 
     if (!showHowTo) return null
@@ -15,7 +17,18 @@ function HowToPlay({showHowTo, setShowHowTo}) {
 
             <div className='ghost-container'>
                 <div className='left'>
-                    <div>Ghost Image</div>
+                <div className='floating-ghost'>
+					<div className='ghost'>
+						<div className='eyes'></div>
+						<div className='skirt'></div>
+                        <div className='wasd'></div>
+					</div>
+					<div className='ghost2'>
+						<div className='eyes'></div>
+						<div className='skirt'></div>
+                        <div className='arrows'></div>
+					</div>
+				</div>
                     <div>Key diagram</div>
                 </div>
                 <div className='right'>
