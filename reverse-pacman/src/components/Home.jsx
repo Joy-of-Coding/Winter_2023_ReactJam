@@ -2,12 +2,14 @@ import './Home.css';
 import { useState, useEffect } from 'react';
 import { RxSpeakerLoud, RxSpeakerOff } from 'react-icons/rx';
 import IntroSound from '../assets/pacman_beginning.wav';
+import HowToPlay from "./HowToPlay.jsx";
 
 const Home = ({ setStartGame }) => {
 	const [audio] = useState(new Audio(IntroSound));
 	const [isMuted, setIsMuted] = useState(true);
 	const [showGameControls, setShowGameControls] = useState(false);
 	const [dotsVisibility, setDotsVisibility] = useState(Array(21).fill(true));
+	const [showHowTo, setShowHowTo] = useState(false)
 
 	useEffect(() => {
 		audio.muted = isMuted;
@@ -28,6 +30,11 @@ const Home = ({ setStartGame }) => {
 		audio.pause();
 		setStartGame(true);
 	};
+
+	const handleHowTo = () => {
+		audio.pause()
+		setShowHowTo(true)
+	}
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -64,6 +71,8 @@ const Home = ({ setStartGame }) => {
 
 	return (
 		<div className='home-container'>
+			<HowToPlay showHowTo={showHowTo} setShowHowTo={setShowHowTo} />
+
 			<div
 				style={{
 					outline: 'none',
@@ -120,8 +129,9 @@ const Home = ({ setStartGame }) => {
 				<button className='home-start-button' onClick={startGame}>
 					Start Game
 				</button>
-				<button className='home-howTo-button'>How To Play</button>
+				<button className='home-howTo-button' onClick={handleHowTo}>How To Play</button>
 			</div>
+
 		</div>
 	);
 };
