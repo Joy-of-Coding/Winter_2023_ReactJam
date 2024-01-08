@@ -1,6 +1,8 @@
 import './Home.css';
 import { useState, useEffect } from 'react';
 import HowToPlay from "./HowToPlay.jsx";
+import ArrowKeys from '../assets/arrow_keys.png';
+import WASDKeys from '../assets/wasd_keys.png';
 
 const Home = ({ setStartGame }) => {
 	const [showGameControls, setShowGameControls] = useState(false);
@@ -78,6 +80,7 @@ const Home = ({ setStartGame }) => {
 				</div>
 			)}
 			{showGameControls && (
+				<>
 				<div className='floating-ghost'>
 					<div className='ghost'>
 						<div className='eyes'></div>
@@ -88,6 +91,16 @@ const Home = ({ setStartGame }) => {
 						<div className='skirt'></div>
 					</div>
 				</div>
+				<div className='floating-keys'>
+					<div className='ghost'>
+						<img src={WASDKeys} />
+					</div>
+					<div className='ghost2'>
+						<img src={ArrowKeys} />
+					</div>
+				</div>
+			</>
+				
 			)}
 
 			<div className='home-buttons-container'>
