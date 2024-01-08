@@ -21,6 +21,8 @@ function CreditsPage({  setOpenCredits }) {
 				<h2 className=''>
 					Credits: Hello there
 				</h2>
+				<a> keyboard PNG Designed By Essie from https://pngtree.com/freepng/keyboard-arrow-vector_2564213.html?sol=downref&id=bef </a>
+				
 			</div>
 			<div>
 				<button
