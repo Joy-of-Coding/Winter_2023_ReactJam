@@ -1,6 +1,6 @@
 .element {
 	position: absolute;
-	z-index: 99;
+	z-index: 10;
 	border-top-left-radius: 70px;
 	border-top-right-radius: 70px;
 }
