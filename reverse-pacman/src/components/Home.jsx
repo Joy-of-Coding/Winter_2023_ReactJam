@@ -1,38 +1,17 @@
 import './Home.css';
 import { useState, useEffect } from 'react';
-import { RxSpeakerLoud, RxSpeakerOff } from 'react-icons/rx';
-import IntroSound from '../assets/pacman_beginning.wav';
 import HowToPlay from "./HowToPlay.jsx";
 
 const Home = ({ setStartGame }) => {
-	const [audio] = useState(new Audio(IntroSound));
-	const [isMuted, setIsMuted] = useState(true);
 	const [showGameControls, setShowGameControls] = useState(false);
 	const [dotsVisibility, setDotsVisibility] = useState(Array(21).fill(true));
 	const [showHowTo, setShowHowTo] = useState(false)
 
-	useEffect(() => {
-		audio.muted = isMuted;
-		audio.play().catch((e) => console.error('Error playing audio:', e));
-
-		audio.loop = true;
-
-		return () => {
-			audio.pause();
-		};
-	}, [isMuted, audio]);
-
-	const toggleMute = () => {
-		setIsMuted(!isMuted);
-	};
-
 	const startGame = () => {
-		audio.pause();
 		setStartGame(true);
 	};
 
 	const handleHowTo = () => {
-		audio.pause()
 		setShowHowTo(true)
 	}
 
@@ -72,20 +51,6 @@ const Home = ({ setStartGame }) => {
 	return (
 		<div className='home-container'>
 			<HowToPlay showHowTo={showHowTo} setShowHowTo={setShowHowTo} />
-
-			<div
-				style={{
-					outline: 'none',
-					position: 'absolute',
-					top: 0,
-					right: 0,
-					cursor: 'pointer',
-					fontSize: '30px',
-				}}
-				onClick={toggleMute}
-			>
-				{isMuted ? <RxSpeakerOff /> : <RxSpeakerLoud />}
-			</div>
 			<div className='home-title-container'>
 				<h1>Pac-Man</h1>
 				<p>(Reversed)</p>
